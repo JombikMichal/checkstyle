@@ -1,15 +1,15 @@
 package cz.cuni.mff.checkstyle.utils;
 
-public enum FilesSufix {
+public enum FilesSuffix {
     JAVA,CONFIG;
 
     @Override
     public String toString() {
         switch (this){
             case JAVA:
-                return ".java";
+                return "java";
             case CONFIG:
-                return ".config";
+                return "config";
             default:
                 throw new IllegalArgumentException("Unsupported file format");
         }

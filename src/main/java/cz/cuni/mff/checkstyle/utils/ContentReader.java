@@ -8,24 +8,25 @@ import java.util.List;
 
 public class ContentReader {
 
-    public static List<File> findFile(String path, String sufix) throws IOException {
+    public static List<File> findFile(String path, String suffix) throws IOException {
         List<File> filesList = new ArrayList<>();
         Files.walk(Paths.get(path))
                 .filter(Files::isRegularFile)
                 .forEach((f) -> {
-                    if (f.toFile().getName().endsWith(sufix))
+                    if (f.toFile().getName().endsWith(suffix))
                         filesList.add(f.toFile());
                 });
 
         return filesList;
     }
+
     //funckia ktora hlada konkretny file - podla mena a typu - otazka je ci ju nedat ako jedinu a checkovat co je null?
-    public static List<File> findFile(String path, String sufix, String name) throws IOException {
+    public static List<File> findFile(String path, String suffix, String name) throws IOException {
         List<File> filesList = new ArrayList<>();
         Files.walk(Paths.get(path))
                 .filter(Files::isRegularFile)
                 .forEach((f) -> {
-                    if (f.toFile().getName().equals(name) && f.toFile().getName().endsWith(sufix))
+                    if (f.toFile().getName().equals(name) && f.toFile().getName().endsWith(suffix))
                         filesList.add(f.toFile());
                 });
 
@@ -45,5 +46,29 @@ public class ContentReader {
             e.printStackTrace();
         }
         return content;
+    }
+
+
+    public static boolean compareHeaders(File pattern, File file) {
+        List<String> patternCompare = getFileContent(pattern);
+        List<String> testFile = getFileContent(file);
+        for (int i = 0; i < patternCompare.size(); i++) {
+            if (!patternCompare.get(i).equals(testFile.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static List<File> getList(String[] args,String suffix){
+        List<File> list = new ArrayList<>();
+        try {
+            for (String s : args) {
+                list.addAll(ContentReader.findFile(s, suffix));
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return list;
     }
 }
