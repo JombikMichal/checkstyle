@@ -71,4 +71,10 @@ public class ContentReader {
         }
         return list;
     }
+
+    public static String relative(final File base, final File file ) {
+        final int rootLength = base.getAbsolutePath().length();
+        final String absFileName = file.getAbsolutePath();
+        return absFileName.substring(rootLength + 1);
+    }
 }

@@ -17,14 +17,16 @@ public final class Main {
         List<File> javaFiles = new ArrayList<>();
         javaFiles.addAll(ContentReader.getList(args, FilesSuffix.JAVA.toString()));
         configs.addAll(ContentReader.getList(args, FilesSuffix.CONFIG.toString()));
-
-
+        String absotulePath = args[0];
         for (File cnfg : configs) {
             try {
                 String content = ConfigReader.getProperties(cnfg, "CheckHeader");
                 for (File testFile : javaFiles) {
-                    if (!ContentReader.compareHeaders(ContentReader.getList(args, FilenameUtils.getExtension(content)).get(0), testFile)) {
-                        System.err.println("src/MyClass.java: Wrong header");
+                    if (ContentReader.getList(args, FilenameUtils.getExtension(content)).size() == 1) {
+                        if (!ContentReader.compareHeaders(ContentReader.getList(args, FilenameUtils.getExtension(content)).get(0), testFile)) {
+                            String relative = new File(absotulePath).toURI().relativize(new File(testFile.toURI()).toURI()).getPath();
+                            System.err.println(String.format("%s: Wrong header",relative));
+                        }
                     }
                 }
             } catch (IOException e) {
