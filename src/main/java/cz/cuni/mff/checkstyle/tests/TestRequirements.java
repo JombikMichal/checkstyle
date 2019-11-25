@@ -18,7 +18,7 @@ public class TestRequirements {
         init();
     }
 
-    private void init(){
+    private void init() {
         javaFiles.addAll(ContentReader.getList(path, FilesSuffix.JAVA.toString()));
     }
 

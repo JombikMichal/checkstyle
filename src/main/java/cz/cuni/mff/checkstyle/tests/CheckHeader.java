@@ -14,7 +14,6 @@ public class CheckHeader implements TestFiles {
         for (File testFile : testRequirements.getJavaFiles()) {
             if (!ContentReader.compareHeaders(pattern, testFile)) {
                 String relative = new File(testRequirements.getPath()).toURI().relativize(new File(testFile.toURI()).toURI()).getPath();
-                System.out.println(String.format("%s: Wrong header", relative));
                 System.err.println(String.format("%s: Wrong header", relative));
             }
         }

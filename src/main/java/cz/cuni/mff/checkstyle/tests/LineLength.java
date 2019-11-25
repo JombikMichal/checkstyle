@@ -15,7 +15,6 @@ public class LineLength implements TestFiles {
             for (int i = 0; i < fileContent.size(); i++) {
                 if (fileContent.get(i).length() > lineLength) {
                     String relative = new File(testRequirements.getPath()).toURI().relativize(new File(testFile.toURI()).toURI()).getPath();
-                    System.out.println(String.format("%s: %d LineLength exceeded: actual length %d, maximum %d", relative, i + 1, fileContent.get(i).length(), lineLength));
                     System.err.println(String.format("%s: %d LineLength exceeded: actual length %d, maximum %d", relative, i + 1, fileContent.get(i).length(), lineLength));
                 }
             }

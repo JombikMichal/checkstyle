@@ -2,8 +2,8 @@ package cz.cuni.mff.checkstyle.tests;
 
 public class TestHandler {
 
-    public static TestFiles getSuitableTestFile(String test){
-        switch (test){
+    public static TestFiles getSuitableTestFile(String test) {
+        switch (test) {
             case "CheckHeader":
                 return new CheckHeader();
             case "LineLength":

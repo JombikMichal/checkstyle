@@ -14,10 +14,9 @@ public class TabChar implements TestFiles {
             String relative = new File(testRequirements.getPath()).toURI().relativize(new File(testFile.toURI()).toURI()).getPath();
             for (int i = 0; i < fileContent.size(); i++) {
                 if (fileContent.get(i).contains("\t")) {
-                    char[] o = fileContent.get(i).toCharArray();
-                    for (int j = 0; j < o.length; j++) {
-                        if (o[j] == '\t') {
-                            System.out.println(String.format("%s: contains tab char at %d:%d", relative, i + 1, j));
+                    char[] chars = fileContent.get(i).toCharArray();
+                    for (int j = 0; j < chars.length; j++) {
+                        if (chars[j] == '\t') {
                             System.err.println(String.format("%s: contains tab char at %d:%d", relative, i + 1, j));
                         }
                     }

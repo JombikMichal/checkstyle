@@ -13,7 +13,6 @@ public class NewlineAtEnd implements TestFiles {
             List<String> fileContent = ContentReader.getFileContent(testFile);
             if (!fileContent.get(fileContent.size() - 1).isEmpty()) {
                 String relative = new File(testRequirements.getPath()).toURI().relativize(new File(testFile.toURI()).toURI()).getPath();
-                System.out.println(String.format("%s: does not contain newline at the end of file", relative));
                 System.err.println(String.format("%s: does not contain newline at the end of file", relative));
             }
         }
