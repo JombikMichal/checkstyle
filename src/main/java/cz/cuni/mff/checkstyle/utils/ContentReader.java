@@ -52,6 +52,10 @@ public class ContentReader {
         return true;
     }
 
+    public static String getRelativePath(String base, File file) {
+        return new File(base).toURI().relativize(new File(file.toURI()).toURI()).getPath();
+    }
+
     public static List<File> getList(String path, String suffix) {
         List<File> list = new ArrayList<>();
         try {
@@ -61,4 +65,5 @@ public class ContentReader {
         }
         return list;
     }
+
 }

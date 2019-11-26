@@ -1,7 +1,7 @@
 package cz.cuni.mff.checkstyle.tests;
 
 import cz.cuni.mff.checkstyle.utils.ContentReader;
-import cz.cuni.mff.checkstyle.utils.FilesSuffix;
+import cz.cuni.mff.checkstyle.utils.enums.FilesSuffix;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,11 +10,9 @@ import java.util.List;
 public class TestRequirements {
     private String path;
     private List<File> javaFiles = new ArrayList<>();
-    private String property;
 
-    public TestRequirements(String path, String property) {
+    public TestRequirements(String path) {
         this.path = path;
-        this.property = property;
         init();
     }
 
@@ -28,9 +26,5 @@ public class TestRequirements {
 
     public List<File> getJavaFiles() {
         return javaFiles;
-    }
-
-    public String getProperty() {
-        return property;
     }
 }

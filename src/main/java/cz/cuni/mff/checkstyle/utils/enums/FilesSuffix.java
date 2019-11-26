@@ -1,11 +1,11 @@
-package cz.cuni.mff.checkstyle.utils;
+package cz.cuni.mff.checkstyle.utils.enums;
 
 public enum FilesSuffix {
-    JAVA,CONFIG;
+    JAVA, CONFIG;
 
     @Override
     public String toString() {
-        switch (this){
+        switch (this) {
             case JAVA:
                 return "java";
             case CONFIG:
