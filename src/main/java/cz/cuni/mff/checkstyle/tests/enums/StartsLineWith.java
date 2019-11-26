@@ -3,7 +3,6 @@ package cz.cuni.mff.checkstyle.tests.enums;
 public enum StartsLineWith {
     PACKAGE;
 
-
     @Override
     public String toString() {
         switch (this) {

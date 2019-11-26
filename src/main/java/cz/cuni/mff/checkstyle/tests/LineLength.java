@@ -1,6 +1,5 @@
 package cz.cuni.mff.checkstyle.tests;
 
-import cz.cuni.mff.checkstyle.utils.ConfigReader;
 import cz.cuni.mff.checkstyle.utils.ContentReader;
 
 import java.io.File;
