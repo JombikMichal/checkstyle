@@ -1,43 +1,36 @@
 package cz.cuni.mff.checkstyle.tests;
 
 import cz.cuni.mff.checkstyle.utils.ContentReader;
-import org.apache.commons.io.FilenameUtils;
 
-import java.io.File;
-import java.util.Objects;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
-public class CheckHeader implements TestFiles {
+public class CheckHeader implements Checker {
 
-    private final String content;
+    private List<String> header;
 
-    public CheckHeader(String content) {
-        this.content = content;
+    public CheckHeader(String value) {
+        try {
+            header = Files.readAllLines(Paths.get(value));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void performTest(TestRequirements testRequirements) {
-        File pattern = ContentReader.findFile(testRequirements.getPath(), content, FilenameUtils.getExtension(content));
-        for (File testFile : testRequirements.getJavaFiles()) {
-            if (!ContentReader.compareHeaders(pattern, testFile)) {
-                System.err.println(String.format("%s: Wrong header", ContentReader.getRelativePath(testRequirements.getPath(), testFile)));
+    public void performCheck(List<String> lines, String relativePath) {
+        for (String line : header){
+            for (int i = 0; i < header.size(); i++) {
+                if (!header.get(i).equals(lines.get(i))) {
+                    System.out.println("iii: " + i);
+                    System.err.println(String.format("%s: Wrong header", relativePath));
+                }
             }
         }
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CheckHeader that = (CheckHeader) o;
-        return Objects.equals(content, that.content);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(content);
-    }
 }

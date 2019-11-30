@@ -4,14 +4,23 @@ import cz.cuni.mff.checkstyle.tests.enums.Characters;
 import cz.cuni.mff.checkstyle.tests.enums.Regex;
 import cz.cuni.mff.checkstyle.tests.enums.StartsLineWith;
 
-public class TestHandler {
+import java.io.File;
+import java.util.Optional;
 
-    public static TestFiles getSuitableTestFile(String type, String property) {
-        switch (type) {
+public class FactoryCheck {
+
+    private String base;
+
+    public FactoryCheck(String base) {
+        this.base = base;
+    }
+
+    public  Checker getCheck(String key, Optional<String> value) {
+        switch (key) {
             case "CheckHeader":
-                return new CheckHeader(property);
+                return new CheckHeader(base + File.separator + value.get());
             case "LineLength":
-                return new LineLength(Integer.parseInt(property));
+                return new LineLength(Integer.parseInt(value.get()));
             case "NewlineAtEnd":
                 return new NewlineAtEnd();
             case "PackageFormat":

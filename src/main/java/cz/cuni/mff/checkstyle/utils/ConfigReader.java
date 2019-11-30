@@ -1,33 +1,30 @@
 package cz.cuni.mff.checkstyle.utils;
 
+import cz.cuni.mff.checkstyle.tests.Checker;
+import cz.cuni.mff.checkstyle.tests.FactoryCheck;
+
 import java.io.*;
-import java.util.Properties;
-import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class ConfigReader {
-    private Properties prop = null;
-    private File file;
 
-    public ConfigReader(File file) {
-        this.file = file;
-        InputStream is = null;
-        try {
-            this.prop = new Properties();
-            is = new FileInputStream(file);
-            prop.load(is);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static final String CONFIG_FILE = "checkstyle.config";
+
+    public static List<Checker> getConfig(String base) throws IOException{
+        List<Checker> checks = new ArrayList<>();
+        List<String> lines = Files.readAllLines(new File(base,CONFIG_FILE).toPath());
+        FactoryCheck factoryCheck = new FactoryCheck(base);
+        for (String line : lines){
+            String[] parts = line.split("=");
+            if (parts.length == 1 ) {
+                checks.add(factoryCheck.getCheck(parts[0],Optional.empty()));
+            }else if (parts.length == 2){
+                checks.add(factoryCheck.getCheck(parts[0], Optional.of(parts[1])));
+            }
         }
+        return checks;
     }
 
-    public Set<Object> getAllKeys() {
-        Set<Object> keys = prop.keySet();
-        return keys;
-    }
-
-    public String getPropertyValue(String key) {
-        return this.prop.getProperty(key);
-    }
 }
