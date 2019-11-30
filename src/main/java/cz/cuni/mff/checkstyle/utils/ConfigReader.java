@@ -30,7 +30,6 @@ public class ConfigReader {
 
     // using simple for loop to find checks
     public static List<Checker> getConfig2(String base) throws IOException {
-        getConfig2(base);
         List<Checker> checks = new ArrayList<>();
         List<String> lines = Files.readAllLines(new File(base, CONFIG_FILE).toPath());
         FactoryCheck factoryCheck = new FactoryCheck(base);

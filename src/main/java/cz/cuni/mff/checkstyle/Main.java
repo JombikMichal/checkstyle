@@ -17,7 +17,7 @@ public  final class Main {
         try {
             // args[0] means absolute path to particular directory
             // get list of all files with .java suffix in current repository
-            List<File> javaFiles = ContentReader.findFile(args[0],FilesSuffix.JAVA.toString());
+            List<File> javaFiles = ContentReader.findFiles(args[0],FilesSuffix.JAVA.toString());
             // get all available checks from config file
             List<Checker> checks = ConfigReader.getConfig(args[0]);
             // browse all java files and perform particular check on it via config

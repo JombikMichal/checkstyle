@@ -9,9 +9,9 @@ public class CheckHeader implements Checker {
 
     private List<String> header;
 
-    public CheckHeader(String value) {
+    public CheckHeader(String absolutePath) {
         try {
-            header = Files.readAllLines(Paths.get(value));
+            header = Files.readAllLines(Paths.get(absolutePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
